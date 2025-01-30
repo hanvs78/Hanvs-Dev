@@ -1,4 +1,6 @@
-WorkShop_Dev_1:
+=================================================
+===================# HAN_Dev #===================
+=================================================
 Lesson:
 - WorkshopExpressJS+NodeJS+MongoDB+ReactJS
 
@@ -28,17 +30,20 @@ code .&&npm start
 npm install --save multer
 
 
-
 #CLIENT:
 /*-----------Install React----------*/
 npx create-react-app client
 remark: [Client] is create a new folder
+
 /*-----------Cd Client and install Axios ----------*/
 npm istall axios
+
 /*-----------react-router-dom ----------*/
 npm install react-router-dom
+
 /*-----------react-pro-sidebar At Folder Client----------*/
 npm install @mui/material @emotion/react @emotion/styled @mui/icons-material react-pro-sidebar react-router-dom
+
 /*-----------react-redux----------*/
 npm install @reduxjs/toolkit react-redux
 
@@ -46,6 +51,11 @@ Afterthat: npm start
 /*-------------------------------------*/
 ( ຖ້າຫາກ Port 3000 ຍັງທຳງານ ສາມາດຢຸດໄດ້ໂດຍໃຊ້)
 npx kill-port 3000
+
+Example:
+F:\WorkShop-DEV\HAN-DEV\client> npx kill-port 3000
+Location path:
+F:\WorkShop-DEV\HAN-DEV\client>
 
 ############# Learning Time ###############
 EP7: 00:00 ນາທີ

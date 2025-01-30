@@ -7,14 +7,14 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box'; // Added Box import
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-//function
-import { register } from '../../../function/auth';
+// function
+import { register } from '../../../functions/auth';
 
 function Copyright(props) {
   return (
@@ -29,25 +29,28 @@ function Copyright(props) {
   );
 }
 
-// TODO remove, this demo shouldn't need to reset the theme.
-
 const defaultTheme = createTheme();
 
 export default function Register() {
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    
-    const hanvs = {
-        name:data.get("name"),
-        password:data.get("password"),
+
+    const formData = {
+      name: data.get("name"),
+      email: data.get("email"), // Added email field
+      password: data.get("password"),
     };
-    console.log(hanvs)
-    register(hanvs)
-    .then((res)=>{
-        console.log(res)
-        alert(res.data)
-    }).catch(err=>console.log(err))
+    console.log(formData);
+
+    try {
+      const res = await register(formData);
+      console.log(res);
+      alert(res.data.message); // Access message property from response
+    } catch (err) {
+      console.log(err);
+      alert(err.response?.data?.message || 'Registration failed'); // Show error message from server
+    }
   };
 
   return (
@@ -60,10 +63,7 @@ export default function Register() {
           sm={4}
           md={7}
           sx={{
-            //Random backgroundImage
             backgroundImage: 'url(https://source.unsplash.com/random?wallpapers)',
-            //Select backgroundImage
-            // backgroundImage:'url(/assets/Pic-1.jpg)',
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
@@ -85,7 +85,7 @@ export default function Register() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign in
+              Sign up
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <TextField
@@ -93,9 +93,20 @@ export default function Register() {
                 required
                 fullWidth
                 id="name"
-                label="name"
+                label="Name"
                 name="name"
+                autoComplete="name"
                 autoFocus
+              />
+              {/* Added Email Field */}
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
               />
               <TextField
                 margin="normal"
@@ -105,7 +116,7 @@ export default function Register() {
                 label="Password"
                 type="password"
                 id="password"
-                autoComplete="current-password"
+                autoComplete="new-password"
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
@@ -117,7 +128,7 @@ export default function Register() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Sign In
+                Sign Up
               </Button>
               <Grid container>
                 <Grid item xs>
@@ -127,7 +138,7 @@ export default function Register() {
                 </Grid>
                 <Grid item>
                   <Link href="#" variant="body2">
-                    {"Don't have an account? Sign Up"}
+                    {"Already have an account? Sign In"}
                   </Link>
                 </Grid>
               </Grid>

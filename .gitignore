@@ -1,0 +1,6 @@
+# import .gitignore at folder Client/Src/.gitignore
+client/.gitignore
+# Folder name: TempDB
+TempDB/
+# ReadMe.txt
+*.txt
